@@ -1,5 +1,7 @@
 ﻿using _125_MusicLibraryBinusTask.Data;
 using _125_MusicLibraryBinusTask.Model;
+using Azure;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 
@@ -35,7 +37,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
         }
 
         [HttpPost]
-        public IActionResult SongAdd([FromBody]Song song)
+        public IActionResult SongAdd([FromBody] Song song)
         {
             if (song is null)
                 return BadRequest(400);
@@ -48,7 +50,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
         [HttpPut("{id}")]
         public IActionResult SongUpdate(int id, [FromBody] Song newSong)
         {
-            Song? song = _context.Songs.Where(f => f.Id == id).FirstOrDefault();
+            Song? song = _context.Songs.FirstOrDefault(f => f.Id == id);
 
             if (song is null)
                 return NotFound($"Not Found Song with this {id}");
@@ -58,11 +60,50 @@ namespace _125_MusicLibraryBinusTask.Controllers
             song.Album = newSong.Album;
             song.ReleaseDate = newSong.ReleaseDate;
             song.Genre = newSong.Genre;
+            song.Like = newSong.Like;
 
             _context.SaveChanges();
             return Ok(song);
-
         }
+
+        [HttpPatch("{id}")]
+        public IActionResult SongUpdatePartial(int id, [FromBody] JsonPatchDocument<Song> patchSong)
+        {
+            if (patchSong is null)
+                BadRequest();
+
+            Song? song = _context.Songs.FirstOrDefault(f => f.Id == id);
+
+            if (song is null)
+                return NotFound($"Can not find a song with id {id}");
+
+            Song? newSong = new Song
+            {
+                Id = song.Id,
+                Title = song.Title,
+                Album = song.Album,
+                ReleaseDate = song.ReleaseDate,
+                Genre = song.Genre,
+                Like = song.Like
+            };
+
+            // I see a lot ModelState stuff. would be nice to get to know this "Creature" better 
+            patchSong.ApplyTo(newSong, ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            song.Title = newSong.Title;
+            song.Album = newSong.Album;
+            song.ReleaseDate = newSong.ReleaseDate;
+            song.Genre = newSong.Genre;
+            song.Like = newSong.Like;
+
+            _context.SaveChanges();
+
+            return Ok(song);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteSong(int id)
         {
@@ -87,6 +128,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
 
             song.Like++;
             _context.SaveChanges();
+
             return Ok(song);
         }
     }
