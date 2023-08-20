@@ -77,10 +77,8 @@ namespace _125_MusicLibraryBinusTask.Controllers
             return Ok(song);
         }
 
-        // this is a route for liking a song https://localhost:7043/api/song/3/like
-        // I want like this : https://localhost:7043/api/song/like/
-        [HttpPut("{id}/like")]
-        public IActionResult SongLike(int id)
+        [HttpPut("like/{id}")]
+        public IActionResult Like(int id)
         {
             Song? song = _context.Songs.FirstOrDefault(f => f.Id == id);
 
