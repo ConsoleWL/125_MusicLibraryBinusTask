@@ -70,7 +70,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
         public IActionResult SongUpdatePartial(int id, [FromBody] JsonPatchDocument<Song> patchSong)
         {
             if (patchSong is null)
-                BadRequest();
+                return BadRequest();
 
             Song? song = _context.Songs.FirstOrDefault(f => f.Id == id);
 
