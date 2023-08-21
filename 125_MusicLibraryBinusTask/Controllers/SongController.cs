@@ -81,6 +81,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
             {
                 Id = song.Id,
                 Title = song.Title,
+                Artist = song.Artist,
                 Album = song.Album,
                 ReleaseDate = song.ReleaseDate,
                 Genre = song.Genre,
