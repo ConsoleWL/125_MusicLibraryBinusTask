@@ -95,6 +95,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
                 return BadRequest(ModelState);
 
             song.Title = newSong.Title;
+            song.Artist = newSong.Artist;
             song.Album = newSong.Album;
             song.ReleaseDate = newSong.ReleaseDate;
             song.Genre = newSong.Genre;
@@ -111,7 +112,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
             Song? song = _context.Songs.FirstOrDefault(f => f.Id == id);
 
             if (song is null)
-                return NotFound($"Not Found Song With id {id}");
+                return NotFound($"Can not find  item with id {id}");
 
             _context.Songs.Remove(song);
             _context.SaveChanges();
