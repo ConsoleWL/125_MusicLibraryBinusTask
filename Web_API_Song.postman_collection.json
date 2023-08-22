@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "62b74aa6-edea-4193-9984-6ab55e481d1d",
+		"name": "Web_API_Song",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28100906"
+	},
+	"item": [
+		{
+			"name": "SongsGet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7043/api/Song/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7043",
+					"path": [
+						"api",
+						"Song",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SongGetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7043/api/Song/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7043",
+					"path": [
+						"api",
+						"Song",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SongAdd",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Title\":\"\",\r\n    \"Artist\":\"\",\r\n    \"Album\":\"\",\r\n    \"ReleaseDate\":\"2019-08-18T01:00:00.39\",\r\n    \"Genre\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7013/api/song/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7013",
+					"path": [
+						"api",
+						"song",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SongUpdate",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Title\":\"\",\r\n    \"Artist\":\"\",\r\n    \"Album\":\"\",\r\n    \"ReleaseDate\":\"2019-08-18T01:00:00.39\",\r\n    \"Genre\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7043/api/Song/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7043",
+					"path": [
+						"api",
+						"Song",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7013/api/song/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7013",
+					"path": [
+						"api",
+						"song",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
