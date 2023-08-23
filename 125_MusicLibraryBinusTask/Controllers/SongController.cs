@@ -77,7 +77,7 @@ namespace _125_MusicLibraryBinusTask.Controllers
             _context.Songs.Remove(song);
             _context.SaveChanges();
 
-            return Ok(song);
+            return NoContent();
         }
 
         [HttpPut("like/{id}")]
