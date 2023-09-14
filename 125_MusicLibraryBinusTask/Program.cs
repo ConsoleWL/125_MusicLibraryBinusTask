@@ -1,5 +1,6 @@
 
 using _125_MusicLibraryBinusTask.Data;
+using _125_MusicLibraryBinusTask.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace _125_MusicLibraryBinusTask
@@ -11,7 +12,7 @@ namespace _125_MusicLibraryBinusTask
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.ConfigureCors();
             builder.Services.AddControllers();
             
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -28,6 +29,8 @@ namespace _125_MusicLibraryBinusTask
                             .EnableDetailedErrors());
 
             var app = builder.Build();
+
+            app.UseCors("CorsPolicy");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
